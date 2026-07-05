@@ -1,18 +1,19 @@
 # 微分方程知识城市 V6｜纽约城区建模版
 
-这是张宇《基础30讲》第15讲「微分方程」的 WebGL 知识城市原型，核心目标不是做二维知识网，而是把微分方程章节建模成一座可探索的知识城市。
+这是张宇《基础30讲》第15讲「微分方程」的 WebGL 知识城市工程项目。核心目标不是做二维知识网，而是把微分方程章节建模成一座可探索、可扩展、可继续开发的知识城市。
 
-## 在线打开
+## 快速运行
 
-下载仓库后，直接用浏览器打开：
-
-```text
-index.html
+```bash
+npm install
+npm run dev
 ```
 
-当前版本为 **V6 稳定进入版**，不依赖 CDN、不依赖 Three.js 外部加载，优先保证能进入城市。
+打开终端提示的本地地址，即可进入工程版知识城市。
 
-## 城市设计总目标
+也可以直接查看 `index.html` 的入口结构，但正式运行建议走 Vite 开发服务。
+
+## 项目定位
 
 V6 的目标是：
 
@@ -27,22 +28,54 @@ V6 的目标是：
 - **微分河与欧拉桥**：河流代表变化率，桥梁代表结构转化。
 - **红钩·风险训练场**：除零丢解、绝对值、常数合并、变量角色混乱等风险点。
 
-## 文件结构
+## 当前工程结构
 
 ```text
 /
 ├── README.md
-├── index.html                         # WebGL 知识城市主文件
+├── index.html
+├── package.json
+├── vite.config.js
 ├── data/
-│   └── city-data.json                  # 城市分区与知识语义数据
+│   └── city-data.json
 ├── docs/
-│   └── v6-city-modeling-spec.docx      # V6 城市建模规格书
+│   └── V6_城市建模规格书.md
+├── notes/
+│   └── development-log.md
 ├── release/
-│   └── v6-new-york-city-build.zip      # V6 完整包
+│   └── README.md
+├── scripts/
+│   └── validate-city-data.js
 ├── source/
-│   └── build_v6_stable.py              # 生成稳定版的构建脚本
-└── notes/
-    └── development-log.md              # 开发记录与验收标准
+│   └── implementation-plan.md
+└── src/
+    ├── main.js
+    ├── styles.css
+    ├── README.md
+    ├── config/
+    │   └── constants.js
+    ├── data/
+    │   └── cityData.js
+    ├── core/
+    │   ├── BuildingFactory.js
+    │   ├── CameraRig.js
+    │   ├── CityBuilder.js
+    │   ├── InteractionManager.js
+    │   └── materials.js
+    ├── ui/
+    │   ├── LabelManager.js
+    │   └── PanelManager.js
+    └── utils/
+        └── geometry.js
+```
+
+## 可用命令
+
+```bash
+npm run dev        # 启动开发服务器
+npm run build      # 打包生产版本
+npm run preview    # 预览打包产物
+npm run lint:data  # 校验城市数据结构
 ```
 
 ## V6 硬验收标准
@@ -53,8 +86,10 @@ V6 的目标是：
 4. 材质和光影明显提升。
 5. 能让学习者有“进入微分方程城市”的感觉。
 
-## 使用建议
+## 后续开发优先级
 
-先验收城市本身，再验收学习内容。当前阶段重点是城市建模：城区布局、地标语义、道路桥梁、河流海湾、天际线、昼夜模式、标签距离规则。
-
-后续版本可以继续强化：第一人称漫游、建筑内部学习、个人漏洞层、考试出口标准、章节扩展。
+1. 继续强化城市建模和天际线。
+2. 加入第一人称进入城市街道。
+3. 做重点建筑内部学习：一阶线性馆、伯努利馆、可降阶电梯、高阶线性塔、应用海湾。
+4. 加个人漏洞层和考试出口标准层。
+5. 扩展到数学一其他章节，形成知识城市群。
