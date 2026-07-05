@@ -11,14 +11,14 @@ import { applyNightMode } from './core/materials.js';
 const canvas = document.querySelector('#city-canvas');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xeaf3fb);
-scene.fog = new THREE.Fog(0xeaf3fb, 900, 2200);
+scene.fog = new THREE.Fog(0xeaf3fb, 980, 2500);
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-const camera = new THREE.PerspectiveCamera(48, 1, 1, 5000);
+const camera = new THREE.PerspectiveCamera(48, 1, 1, 5200);
 const rig = new CameraRig(camera, renderer.domElement);
 const panel = new PanelManager(document.querySelector('#info-panel'));
 const labels = new LabelManager(document.querySelector('#label-layer'), camera, renderer);
@@ -26,39 +26,37 @@ const labels = new LabelManager(document.querySelector('#label-layer'), camera, 
 const city = new CityBuilder(scene, cityData);
 const pickables = city.build();
 
-new InteractionManager({
-  camera,
-  renderer,
-  pickables,
-  onPick: (object) => panel.showObject(object)
-});
+new InteractionManager({ camera, renderer, pickables, onPick: (object) => panel.showObject(object) });
 
 function addLights() {
-  const hemi = new THREE.HemisphereLight(0xffffff, 0xd2e4f2, 1.8);
+  const hemi = new THREE.HemisphereLight(0xffffff, 0xcfe2f0, 1.9);
   scene.add(hemi);
-
-  const sun = new THREE.DirectionalLight(0xffffff, 3.4);
-  sun.position.set(-500, 850, 600);
+  const sun = new THREE.DirectionalLight(0xffffff, 3.8);
+  sun.position.set(-560, 900, 680);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.camera.left = -900;
-  sun.shadow.camera.right = 900;
-  sun.shadow.camera.top = 900;
-  sun.shadow.camera.bottom = -900;
+  sun.shadow.camera.left = -980;
+  sun.shadow.camera.right = 980;
+  sun.shadow.camera.top = 980;
+  sun.shadow.camera.bottom = -980;
   scene.add(sun);
+  const coreGlow = new THREE.PointLight(0x6fb5ff, 0.9, 540);
+  coreGlow.position.set(180, 260, -180);
+  scene.add(coreGlow);
 }
 
 function registerLabels() {
   scene.traverse((object) => {
     if (!object.userData || !object.userData.title) return;
-    if (object.userData.type === 'district') labels.register(object, object.userData.title, { yOffset: 52 });
-    if (object.userData.type === 'building' && shouldShowBuildingLabel(object)) labels.register(object, object.userData.title, { yOffset: 34, small: true });
+    if (object.userData.type === 'district') labels.register(object, object.userData.title, { yOffset: 64 });
+    if (object.userData.type === 'building' && shouldShowBuildingLabel(object)) labels.register(object, object.userData.title, { yOffset: 42, small: object.userData.labelTier !== 'landmark' });
+    if (object.userData.type === 'bridge' && object.userData.labelTier === 'landmark') labels.register(object, object.userData.title, { yOffset: 30, small: true });
   });
 }
 
 function shouldShowBuildingLabel(object) {
   const id = object.userData.id || '';
-  return id.includes('tower') || id.includes('linear-first') || id.includes('bernoulli') || id.includes('elevator');
+  return object.userData.labelTier === 'landmark' || id.includes('tower') || id.includes('linear-first') || id.includes('bernoulli') || id.includes('elevator');
 }
 
 function resize() {
@@ -83,6 +81,9 @@ document.querySelector('#btn-day-night').addEventListener('click', () => {
 document.querySelector('#btn-metro').addEventListener('click', () => {
   metroVisible = !metroVisible;
   city.setMetroVisible(metroVisible);
+});
+document.querySelectorAll('[data-preset]').forEach((button) => {
+  button.addEventListener('click', () => rig.flyToPreset(button.dataset.preset));
 });
 
 function animate() {
