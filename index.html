@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang='zh-CN'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>微分方程知识城市 V6｜纽约城区建模版</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei',Arial,sans-serif;background:#eaf3fb;color:#082844}main{max-width:1180px;margin:0 auto;padding:32px}h1{font-size:36px;margin:0 0 8px}.subtitle{color:#62788e;margin-bottom:24px}.city{position:relative;height:720px;border-radius:32px;background:linear-gradient(180deg,#f7fbff,#dcecf7);box-shadow:0 24px 70px #173e6422;overflow:hidden;border:1px solid #d8e6f2}.river{position:absolute;left:-120px;top:250px;width:1400px;height:90px;background:#8ed4ee;transform:rotate(11deg);border-radius:999px;opacity:.88}.bay{position:absolute;right:-120px;bottom:110px;width:420px;height:260px;background:#9bdceb;border-radius:60% 40% 0 0;opacity:.85}.road{position:absolute;height:18px;background:#f5ead0;border-radius:99px;box-shadow:0 4px 12px #9c8b6c33}.r1{left:90px;top:460px;width:850px;transform:rotate(-14deg)}.r2{left:330px;top:300px;width:500px;transform:rotate(12deg)}.r3{left:380px;top:520px;width:300px;transform:rotate(-36deg)}.district{position:absolute;border-radius:22px;padding:16px;border:1px solid #ffffffaa;box-shadow:0 16px 40px #16466e24}.district h2{font-size:18px;margin:0 0 8px}.district p{font-size:13px;line-height:1.6;margin:0;color:#314a60}.entrance{left:55px;bottom:95px;width:240px;height:145px;background:#dfeefa}.queens{left:180px;top:200px;width:310px;height:235px;background:#d9ecff}.brooklyn{left:400px;bottom:70px;width:300px;height:190px;background:#e8e0d5}.manhattan{left:560px;top:85px;width:330px;height:310px;background:#d5e4f5}.bayzone{right:55px;bottom:80px;width:260px;height:210px;background:#d9f0ef}.risk{left:380px;top:40px;width:280px;height:120px;background:#ffe4d8}.grey{right:80px;top:55px;width:190px;height:110px;background:#d8d8d8}.tower{position:absolute;bottom:18px;width:28px;border-radius:7px 7px 0 0;background:#407bd6;box-shadow:inset 0 10px 20px #ffffff44}.manhattan .t1{left:58px;height:150px}.manhattan .t2{left:102px;height:210px;background:#245fc0}.manhattan .t3{left:150px;height:130px;background:#5a82d8}.manhattan .t4{left:205px;height:175px;background:#476ab0}.manhattan .t5{left:260px;height:145px;background:#7b67c9}.block{position:absolute;border-radius:8px;background:#6fb0e8}.queens .b1{left:30px;bottom:30px;width:55px;height:70px}.queens .b2{left:105px;bottom:35px;width:60px;height:90px;background:#4f91dc}.queens .b3{left:190px;bottom:28px;width:70px;height:60px;background:#79c7a7}.brooklyn .b1{left:45px;bottom:26px;width:60px;height:120px;background:#b07d58}.brooklyn .b2{left:140px;bottom:26px;width:80px;height:74px;background:#c39262}.bridge{position:absolute;left:735px;top:360px;width:260px;height:22px;background:#d8b16a;border-radius:99px;transform:rotate(23deg);box-shadow:0 8px 18px #72511d44}.line{position:absolute;height:4px;border-radius:99px;background:#2d79d8;opacity:.6}.l1{left:100px;top:525px;width:850px;transform:rotate(-14deg)}.l2{left:250px;top:220px;width:530px;transform:rotate(18deg);background:#7a55db}.pill{display:inline-block;margin:3px 4px 3px 0;padding:4px 8px;border-radius:999px;background:#fff;color:#1c63a6;font-size:12px;font-weight:700}.panel{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:#fff;border:1px solid #d8e6f2;border-radius:20px;padding:18px;box-shadow:0 14px 40px #1c4c7d12}.card h3{margin:0 0 8px}.card li{font-size:14px;line-height:1.8}footer{color:#6b7f91;font-size:13px;margin:20px 0}</style>
+</head>
+<body>
+<main>
+<h1>微分方程知识城市 V6｜纽约城区建模版</h1>
+<div class='subtitle'>张宇《基础30讲》第15讲：以纽约式城区隐喻重建微分方程知识空间。当前仓库版优先沉淀 V6 设计信息与稳定入口。</div>
+<section class='city'>
+<div class='river'></div><div class='bay'></div><div class='road r1'></div><div class='road r2'></div><div class='road r3'></div><div class='line l1'></div><div class='line l2'></div><div class='bridge'></div>
+<div class='district entrance'><h2>入口港·概念广场</h2><p><span class='pill'>阶</span><span class='pill'>解</span><span class='pill'>通解</span><span class='pill'>特解</span><br>低矮开阔，负责定义整座城市的研究对象。</p></div>
+<div class='district queens'><h2>皇后·一阶方程区</h2><p><span class='pill'>可分离</span><span class='pill'>齐次</span><span class='pill'>一阶线性</span><span class='pill'>伯努利</span><span class='pill'>全微分</span></p><div class='block b1'></div><div class='block b2'></div><div class='block b3'></div></div>
+<div class='district brooklyn'><h2>布鲁克林·可降阶工业区</h2><p><span class='pill'>p=y'</span><span class='pill'>缺 y</span><span class='pill'>缺 x</span><span class='pill'>p dp/dy</span></p><div class='block b1'></div><div class='block b2'></div></div>
+<div class='district manhattan'><h2>曼哈顿·高阶线性核心岛</h2><p><span class='pill'>特征方程</span><span class='pill'>重根</span><span class='pill'>复根</span><span class='pill'>非齐次</span></p><div class='tower t1'></div><div class='tower t2'></div><div class='tower t3'></div><div class='tower t4'></div><div class='tower t5'></div></div>
+<div class='district bayzone'><h2>应用海湾·现实建模码头</h2><p><span class='pill'>自行车轨迹</span><span class='pill'>飞机减速</span><span class='pill'>牛顿冷却</span><br>现实关系翻译成变化率关系。</p></div>
+<div class='district risk'><h2>红钩·风险训练场</h2><p><span class='pill'>除零丢解</span><span class='pill'>绝对值</span><span class='pill'>常数合并</span><span class='pill'>变量角色</span></p></div>
+<div class='district grey'><h2>灰岛·差分方程</h2><p>数学三选学区，数学一主线暂不深入。</p></div>
+</section>
+<section class='panel'>
+<div class='card'><h3>V6 城市硬标准</h3><ul><li>远看像城市，不像知识点摆放。</li><li>中看能分清曼哈顿、皇后、布鲁克林、应用海湾。</li><li>道路、桥梁、河流承担知识关系。</li></ul></div>
+<div class='card'><h3>城区重要性规则</h3><ul><li>最难最重要的内容在曼哈顿核心岛。</li><li>基础方法在皇后区展开。</li><li>转化加工在布鲁克林工业区。</li></ul></div>
+<div class='card'><h3>后续开发方向</h3><ul><li>WebGL/Three.js 真实三维版本。</li><li>第一人称进入城市街道。</li><li>建筑内部学习与个人漏洞层。</li></ul></div>
+</section>
+<footer>说明：本仓库已保存 V6 的设计规格、数据结构和稳定入口。后续可继续迭代为真正 WebGL 漫游版。</footer>
+</main>
+</body>
+</html>
