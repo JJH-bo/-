@@ -11,8 +11,9 @@ export function makeRoundedBox(width, height, depth, radius = 0) {
 
 export function makeLine(points, color, width = 4, options = {}) {
   const vectors = points.map(vec3);
-  const curve = new THREE.CatmullRomCurve3(vectors, options.closed ?? false, 'catmullrom', 0.24);
-  const geometry = new THREE.TubeGeometry(curve, options.segments ?? 96, width, options.radialSegments ?? 8, false);
+  const closed = options.closed ?? false;
+  const curve = new THREE.CatmullRomCurve3(vectors, closed, 'catmullrom', options.tension ?? 0.24);
+  const geometry = new THREE.TubeGeometry(curve, options.segments ?? 96, width, options.radialSegments ?? 8, closed);
   const material = new THREE.MeshStandardMaterial({
     color,
     roughness: options.roughness ?? 0.72,
@@ -23,7 +24,8 @@ export function makeLine(points, color, width = 4, options = {}) {
     emissiveIntensity: options.emissiveIntensity ?? 0
   });
   material.userData.baseColor = color;
-  material.userData.glow = options.glow ?? 0;
+  material.userData.glow = options.glow ?? options.emissive ?? 0;
+  material.userData.nightIntensity = options.nightIntensity ?? 0.38;
   return new THREE.Mesh(geometry, material);
 }
 
@@ -51,7 +53,9 @@ export function makeGroundPolygon(points, color, materialFactory, options = {}) 
     roughness: options.roughness ?? 0.86,
     metalness: options.metalness ?? 0.02,
     transparent: options.transparent ?? false,
-    opacity: options.opacity ?? 1
+    opacity: options.opacity ?? 1,
+    glow: options.glow ?? 0,
+    nightIntensity: options.nightIntensity ?? 0.2
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.receiveShadow = true;
@@ -89,7 +93,9 @@ export function makeRoadSegment(start, end, width, color, materialFactory, optio
     roughness: options.roughness ?? 0.78,
     metalness: options.metalness ?? 0.03,
     emissive: options.emissive ?? 0x000000,
-    emissiveIntensity: options.emissiveIntensity ?? 0
+    emissiveIntensity: options.emissiveIntensity ?? 0,
+    glow: options.glow ?? 0,
+    nightIntensity: options.nightIntensity ?? 0.24
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set((x1 + x2) / 2, (y1 + y2) / 2, (z1 + z2) / 2);
@@ -106,9 +112,13 @@ export function makeRoadPath(points, width, color, materialFactory, options = {}
   points.forEach((point) => {
     const cap = new THREE.Mesh(
       new THREE.CylinderGeometry(width / 2, width / 2, options.height ?? 1.25, 24),
-      materialFactory(color, { roughness: options.roughness ?? 0.78, metalness: 0.03 })
+      materialFactory(color, {
+        roughness: options.roughness ?? 0.78,
+        metalness: 0.03,
+        glow: options.glow ?? 0,
+        nightIntensity: options.nightIntensity ?? 0.24
+      })
     );
-    cap.rotation.x = Math.PI / 2;
     cap.position.set(point[0], point[1], point[2]);
     cap.receiveShadow = true;
     group.add(cap);
