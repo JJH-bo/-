@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import './styles.css';
 import { cityData } from './data/cityData.js';
 import { CityBuilder } from './core/CityBuilder.js';
+import { CityDetailLayer } from './core/CityDetailLayer.js';
 import { CameraRig } from './core/CameraRig.js';
 import { InteractionManager } from './core/InteractionManager.js';
 import { LabelManager } from './ui/LabelManager.js';
@@ -25,6 +26,8 @@ const labels = new LabelManager(document.querySelector('#label-layer'), camera, 
 
 const city = new CityBuilder(scene, cityData);
 const pickables = city.build();
+const detailLayer = new CityDetailLayer(scene);
+detailLayer.build();
 
 new InteractionManager({ camera, renderer, pickables, onPick: (object) => panel.showObject(object) });
 
