@@ -51,8 +51,9 @@ body {
   font-weight: 800;
   cursor: pointer;
   pointer-events: auto;
+  transition: transform 0.14s ease, background 0.14s ease;
 }
-.topbar button:hover { transform: translateY(-1px); }
+.topbar button:hover { transform: translateY(-1px); background: rgba(255,255,255,0.96); }
 
 .info-panel {
   position: fixed;
@@ -93,10 +94,11 @@ body {
   font-weight: 900;
   letter-spacing: 0.01em;
   white-space: nowrap;
+  transition: opacity 0.16s ease;
 }
-.city-label.district { font-size: 14px; padding: 6px 10px; border-radius: 14px; background: rgba(247, 247, 242, 0.80); }
-.city-label.landmark { font-size: 11px; }
-.city-label.small { font-size: 10px; opacity: 0.78; }
+.city-label.district { font-size: 14px; padding: 6px 10px; border-radius: 14px; background: rgba(247, 247, 242, 0.84); }
+.city-label.landmark { font-size: 11px; border-color: rgba(122, 146, 162, 0.58); }
+.city-label.small { font-size: 10px; opacity: 0.72; }
 .city-label.hidden { display: none; }
 
 .hud {
@@ -149,3 +151,10 @@ body.night .info-panel li,
 body.night .brand span,
 body.night .hud { color: #a6bed6; }
 body.night .city-label { background: rgba(9, 29, 49, 0.78); color: #e6f2ff; border-color: rgba(88, 145, 190, 0.35); }
+body.night .pill { background: rgba(42, 68, 92, 0.72); color: #dceeff; }
+
+@media (max-width: 980px) {
+  .topbar { right: 18px; }
+  .info-panel { width: min(350px, calc(100vw - 36px)); top: auto; bottom: 18px; max-height: 42vh; }
+  .hud { display: none; }
+}
