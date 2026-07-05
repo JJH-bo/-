@@ -12,7 +12,11 @@ export class LabelManager {
   register(object, text, options = {}) {
     const el = document.createElement('div');
     const tier = object.userData?.type === 'district' ? 'district' : (object.userData?.labelTier || 'mid');
-    el.className = `city-label ${tier === 'landmark' ? 'landmark' : ''} ${tier === 'district' ? 'district' : ''} ${options.small ? 'small' : ''}`;
+    const classes = ['city-label'];
+    if (tier === 'landmark') classes.push('landmark');
+    if (tier === 'district') classes.push('district');
+    if (options.small) classes.push('small');
+    el.className = classes.join(' ');
     el.textContent = text;
     this.layer.appendChild(el);
     this.labels.set(object.uuid, { object, el, options: { ...options, tier } });
@@ -27,18 +31,19 @@ export class LabelManager {
       const x = (vector.x * 0.5 + 0.5) * rect.width;
       const y = (-vector.y * 0.5 + 0.5) * rect.height;
       const behind = vector.z > 1;
-      const near = distance < 430;
-      const far = distance > 1180;
-      const hideMid = options.tier !== 'district' && (near || far);
-      const hideDistrict = options.tier === 'district' && near;
-      el.classList.toggle('hidden', behind || hideMid || hideDistrict);
-      el.style.left = `${x}px`;
-      el.style.top = `${y}px`;
+      const near = distance < 420;
+      let shouldHide = behind || near;
+      if (options.tier === 'district') shouldHide = shouldHide || distance < 520;
+      else if (options.tier === 'landmark') shouldHide = shouldHide || distance < 520 || distance > 1540;
+      else shouldHide = shouldHide || distance < 520 || distance > 980;
+      el.classList.toggle('hidden', shouldHide);
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
     });
   }
 
   clear() {
-    this.layer.replaceChildren();
+    this.layer.innerHTML = '';
     this.labels.clear();
   }
 }
