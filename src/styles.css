@@ -18,9 +18,11 @@ body {
   position: fixed;
   left: 22px;
   top: 18px;
+  right: 390px;
   z-index: 20;
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 9px;
   align-items: center;
   pointer-events: none;
 }
@@ -84,6 +86,8 @@ body {
   font-weight: 900;
   white-space: nowrap;
 }
+.city-label.district { font-size: 16px; padding: 8px 12px; border-radius: 15px; }
+.city-label.landmark { font-size: 12px; }
 .city-label.small { font-size: 10px; opacity: 0.84; }
 .city-label.hidden { display: none; }
 .hud {
