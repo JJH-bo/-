@@ -16,9 +16,19 @@ export const MODES = {
 };
 
 export const CAMERA_PRESETS = {
-  overview: { position: [780, 720, 980], target: [80, 0, 20] },
-  manhattan: { position: [370, 360, 480], target: [170, -130, 80] },
-  queens: { position: [-520, 360, 500], target: [-360, -70, 40] },
-  brooklyn: { position: [-50, 360, 470], target: [40, 190, 40] },
-  bay: { position: [760, 330, 420], target: [520, 120, 35] }
+  overview: { position: [980, 760, 1080], target: [60, 0, 60] },
+  entrance: { position: [-850, 330, 520], target: [-630, 0, 245] },
+  queens: { position: [-770, 430, 230], target: [-455, 0, -60] },
+  brooklyn: { position: [140, 440, 720], target: [145, 0, 355] },
+  manhattan: { position: [560, 520, 280], target: [155, 0, -140] },
+  bay: { position: [850, 410, 520], target: [560, 0, 270] },
+  risk: { position: [-120, 330, 820], target: [-165, 0, 560] }
+};
+
+export const LABEL_RULES = {
+  NEAR_HIDE: 420,
+  DISTRICT_MIN: 520,
+  LANDMARK_MIN: 520,
+  LANDMARK_MAX: 1540,
+  MID_MAX: 1080
 };

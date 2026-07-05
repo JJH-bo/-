@@ -1,6 +1,6 @@
 {
   "name": "differential-equation-knowledge-city-v6",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "description": "张宇第15讲《微分方程》WebGL 知识城市 V6：纽约城区建模版。",
@@ -8,7 +8,8 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "lint:data": "node scripts/validate-city-data.js"
+    "lint:data": "node scripts/validate-city-data.js",
+    "validate:data": "node scripts/validate-city-data.js"
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "latest",
