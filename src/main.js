@@ -11,14 +11,14 @@ import { applyNightMode } from './core/materials.js';
 const canvas = document.querySelector('#city-canvas');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xe6edf1);
-scene.fog = new THREE.Fog(0xe6edf1, 1180, 3100);
+scene.fog = new THREE.Fog(0xe6edf1, 1220, 3350);
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-const camera = new THREE.PerspectiveCamera(45, 1, 1, 5400);
+const camera = new THREE.PerspectiveCamera(45, 1, 1, 5600);
 const rig = new CameraRig(camera, renderer.domElement);
 const panel = new PanelManager(document.querySelector('#info-panel'));
 const labels = new LabelManager(document.querySelector('#label-layer'), camera, renderer);
@@ -29,22 +29,21 @@ const pickables = city.build();
 new InteractionManager({ camera, renderer, pickables, onPick: (object) => panel.showObject(object) });
 
 function addLights() {
-  const hemi = new THREE.HemisphereLight(0xffffff, 0xb9cbd0, 1.55);
-  scene.add(hemi);
-  const sun = new THREE.DirectionalLight(0xffffff, 3.2);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xb9cbd0, 1.55));
+  const sun = new THREE.DirectionalLight(0xffffff, 3.25);
   sun.position.set(-620, 980, 720);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.camera.left = -1120;
-  sun.shadow.camera.right = 1120;
-  sun.shadow.camera.top = 980;
-  sun.shadow.camera.bottom = -980;
+  sun.shadow.camera.left = -1180;
+  sun.shadow.camera.right = 1180;
+  sun.shadow.camera.top = 1040;
+  sun.shadow.camera.bottom = -1040;
   sun.shadow.camera.near = 1;
-  sun.shadow.camera.far = 2400;
+  sun.shadow.camera.far = 2600;
   scene.add(sun);
-  const manhattanGlow = new THREE.PointLight(0x9fd7ff, 0.55, 620);
-  manhattanGlow.position.set(150, 260, -190);
-  scene.add(manhattanGlow);
+  const coreGlow = new THREE.PointLight(0x9fd7ff, 0.52, 640);
+  coreGlow.position.set(28, 260, -98);
+  scene.add(coreGlow);
 }
 
 function registerLabels() {
@@ -62,7 +61,7 @@ function registerLabels() {
 function shouldShowBuildingLabel(object) {
   const payload = object.userData.payload || {};
   const id = object.userData.id || '';
-  return payload.strongSymbol || id === 'euler-bridge-entry' || id === 'linear-first-order' || id === 'reduction-elevator';
+  return Boolean(payload.strongSymbol || id === 'euler-bridge-entry' || id === 'linear-first-order-hall' || id === 'reduction-elevator' || id === 'liberty-concept-torch');
 }
 
 function resize() {
