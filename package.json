@@ -1,9 +1,9 @@
 {
   "name": "differential-equation-knowledge-city-v6",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "private": true,
   "type": "module",
-  "description": "张宇第15讲《微分方程》WebGL 知识城市 V6.3：曼哈顿全岛工程版。",
+  "description": "张宇第15讲《微分方程》WebGL 知识城市 V6.4.2：街区-建筑-道路真实建模重构版。",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
