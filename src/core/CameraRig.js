@@ -6,9 +6,9 @@ export class CameraRig {
     this.camera = camera;
     this.domElement = domElement;
     this.target = new THREE.Vector3(...CAMERA_PRESETS.overview.target);
-    this.distance = 1380;
-    this.theta = -0.72;
-    this.phi = 0.92;
+    this.distance = 1510;
+    this.theta = -0.62;
+    this.phi = 0.84;
     this.isDragging = false;
     this.last = { x: 0, y: 0 };
     this.bind();
@@ -35,7 +35,7 @@ export class CameraRig {
     this.domElement.addEventListener('wheel', (event) => {
       event.preventDefault();
       const factor = event.deltaY > 0 ? 1.08 : 0.92;
-      this.distance = THREE.MathUtils.clamp(this.distance * factor, 260, 2550);
+      this.distance = THREE.MathUtils.clamp(this.distance * factor, 260, 2750);
       this.update();
     }, { passive: false });
   }
